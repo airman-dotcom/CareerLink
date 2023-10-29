@@ -60,6 +60,7 @@ app.post("/auth", (req, res) => {
       }
     })
   }
+    
   else {
     //login
     credentials.findOne({username: username}, (err, data) => {
