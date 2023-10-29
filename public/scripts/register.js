@@ -11,4 +11,20 @@ btn.onclick = function(){
     body: JSON.stringify({email: email.value, password: psw.value, username: uname.value})
   }
   fetch("/auth", send_data)
+  .then(res => res.json())
+  .then(function(json){
+    if (json.status){
+      message(true);
+    } else {
+      message(false, json.message)
+    }
+  })
+}
+
+function message(type, m){
+  if (type){
+    alert("Youpi, its made");
+  }else {
+    alert(m);
+  }
 }

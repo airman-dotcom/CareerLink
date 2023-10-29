@@ -1,8 +1,13 @@
 const express = require("express")
 const app = express();
 const http = require("http");
+const API_KEY = "497bc1d03a0821a85fe76f672121288b";
+const SECRET = "ef366fcf0176d1cb7f74a49d90840c74";
 const server = http.createServer(app);
 const fs = require("fs");
+const mailjet = require("node-mailjet")
+let client = mailjet.Client.apiConnect(API_KEY, SECRET);
+
 const { Server } = require("socket.io");
 const io = new Server(server);
 const { v4: uuidv4 } = require("uuid");
@@ -23,7 +28,7 @@ let user1;
 server.listen(port, function() {
   console.log("Server Starting")
 })
-let credentials = db.collection("credentials")
+let credentials = db.collection("Credentials")
 mongoose.connection.on("connected", (err) => {
   if (err) {
     console.log(err)
@@ -43,6 +48,28 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/home.html");
 })
 
+async function send_mail(sender, rec, title, message, html){
+  const request = client.post("send", {version: "v3.1"})
+  .request({
+    "Messages":[
+      {
+        "From": sender,
+        "To": rec,
+        "Subject": title,
+        "TextPart": message,
+        "HTMLPart": html
+      }
+    ]
+  })
+  request.then((result) => {
+    share_result_email(result.body);
+  })
+}
+
+function share_result_email(info){
+  
+}
+
 app.post("/auth", (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
@@ -53,6 +80,7 @@ app.post("/auth", (req, res) => {
         res.json({status: false, message:  "Username already exists"})
       } else {
         let uuid = uuidv4();
+        
         credentials.insertOne({username: username, password: password, email: req.body.email, id: uuid})
         console.log(credentials)
         res.json({status: true});
@@ -68,3 +96,6 @@ app.post("/auth", (req, res) => {
     })
   }
 })
+
+let a = "<h1>Hellow!</h1>";
+send_mail({"Email": "careerlink.dhs@gmail.com", "Name": "Career Link"}, [{"Email": "amathakbari@gmail.com", Name: "Arman Akbari"}], "test!", "Hellow!", a);
