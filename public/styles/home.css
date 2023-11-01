@@ -1,0 +1,98 @@
+/*@font-face {
+  	font-family: "Norwester";
+    
+}*/
+
+h1, h2, h3, h4, h5, h6, p {
+    font-family: "Open Sans";
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+.left-header>h1 {
+    color: blue;
+    font-family: "Open Sans";
+}
+
+.left-header>h3, .right-header > h3 {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-family: "Open Sans";
+}
+
+a {
+    padding-left: 12px;
+    padding-right: 12px;
+    font-family: "Open Sans"; 
+}
+
+.left-header {
+    width: 75%;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    border-bottom: 2px solid black;
+    background-color: inherit;
+}
+
+.header {
+    width: 100vw;
+    height: 20vh;
+    z-index: 5;
+    display: flex;
+    background-color: #9dc1d1;
+}
+
+.body {
+    width: 100vw;
+    height: 80vh;
+    display: grid;
+    z-index: 4;
+    background-color: #d3e2e9;
+    align-self: flex-end;
+    place-items: center;
+}
+
+.mbody{
+    position:absolute;
+    z-index: 5;
+    width: 75vw;
+    height: 60vh;
+    display: grid;
+    padding-top: 4vh;
+    border-radius: 25px;
+    background-color: white;
+    justify-items: center;
+    gap: 5px;
+}
+
+.mbody > * {
+    margin: 0;
+    place-self:center;
+}
+
+.logo {
+    width: 101px;
+    height: 101px;
+    border-radius: 5px;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: flex-start !important;
+}
+
+.right-header {
+    width: 25%;
+    height: 20vh;
+    display:flex;
+    align-items: center;
+    border-bottom: solid black 2px;
+    background-color: inherit;
+}

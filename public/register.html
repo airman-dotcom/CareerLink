@@ -1,21 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@300&family=Open+Sans&display=swap" rel="stylesheet">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register Page</title>
+  <title>Register</title>
+  <link rel="stylesheet" href="styles/login.css" class="css">
 </head>
+
 <body>
   <div class="container">
-    <h3>Register Here</h3>
-    <div class="inputs">
-      <input type="email" id="email"/>
-      <input type="text" id="uname">
-      <input type="password" id="psw"/>
+    <div class="header">
+      <div class="left-header">
+        <img onclick="window.location.href = '/'" class="logo" src="/assets/logo.png" />
+        <a href="/home">
+          <h1>CareerLink</h1>
+        </a>
+        <a href="/about">
+          <h3>About CareerLink</h3>
+        </a>
+        <a href="/why">
+          <h3>Why CareerLink?</h3>
+        </a>
+      </div>
+      <div class="right-header">
+        <a href="/login">
+          <h3>Login</h3>
+        </a>
+        <a href="/register">
+          <h3>Register</h3>
+        </a>
+        <a href="/help">
+          <h3 style="width: 25px; height: 25px; background-color: lightyellow; border-radius: 5px;">❓</h3>
+        </a>
+      </div>
     </div>
-    <button id="submit">Register</button>
+    <div class="body">
+      <div style="display:none;" id="alert" class="modal">
+        <h1 id="title"></h1>
+        <h4 id="message"></h4>
+        <h5>Press outside the box to close it.</h5>
+      </div>
+      <div class="mbody">
+        <h3>Register</h3>
+        <div class="inputs">
+          <input type="text" id="fname" placeholder="First Name" />
+          <input type="text" id="lname" placeholder="Last Name" />
+          <input type="email" id="email" placeholder="Email Address" />
+          <input type="password" id="psw" placeholder="Enter Password" />
+        </div>
+        <button id="submit">Register</button>
+      </div>
+    </div>
   </div>
+  
 </body>
-  <script src="./scripts/register.js"></script>
+<script src="./scripts/register.js"></script>
+
 </html>

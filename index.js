@@ -67,12 +67,15 @@ async function send_mail(sender, rec, title, message, html){
 }
 
 function share_result_email(info){
-  
+
 }
 
 app.post("/auth", (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
+  let fname = req.body.fname;
+  let lname = req.body.lname;
+  let email = req.body.email;
   if (Object.keys(req.body).includes("email")){
     //Registration
     credentials.findOne({username: username}, (err, data) => {
@@ -80,8 +83,9 @@ app.post("/auth", (req, res) => {
         res.json({status: false, message:  "Username already exists"})
       } else {
         let uuid = uuidv4();
-        
-        credentials.insertOne({username: username, password: password, email: req.body.email, id: uuid})
+        //add One
+        credentials.insertOne({username: username, password: password, email: email, id: uuid, first_name: fname, last_name: lname})
+        send_mail({Email: "careerlink.dhs@gmail.com", Name: "Career Link"},{Email: email, Name: `${fname} ${lname}`});
         console.log(credentials)
         res.json({status: true});
         return;
@@ -97,5 +101,4 @@ app.post("/auth", (req, res) => {
   }
 })
 
-let a = "<h1>Hellow!</h1>";
-send_mail({"Email": "careerlink.dhs@gmail.com", "Name": "Career Link"}, [{"Email": "amathakbari@gmail.com", Name: "Arman Akbari"}], "test!", "Hellow!", a);
+
