@@ -17,17 +17,25 @@ html, body {
     font-family: "Open Sans";
 }
 
-.left-header>h3, .right-header > h3 {
+.left-header>a, .right-header > a {
     padding-left: 12px;
     padding-right: 12px;
     font-family: "Open Sans";
+    text-decoration: none;
+    background-color: transparent;
+    border-radius: 10px;
+    color: black;
 }
 
-a {
-    padding-left: 12px;
-    padding-right: 12px;
-    font-family: "Open Sans"; 
+.left-header > a:hover, .right-header > a:hover {
+    animation: h 1s linear;
 }
+
+@keyframes h {
+    from {background-color: transparent;}
+    to {background-color: orange;}
+}
+
 
 .left-header {
     width: 75%;
