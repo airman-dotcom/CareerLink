@@ -7,6 +7,35 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
+.left-header > div {
+    display: flex;
+    height: 5vh;
+    width: 3vw;
+    margin-left: 5vw;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 5px;
+    color: black;
+}
+
+#news {
+    width: 15vw;
+    margin-left: 2.5vw;
+}
+
+
+
+.left-header > div > p {
+    height: 2vh;
+    margin: 0;
+}
+.left-header > div > *{
+    margin: 0;
+}
+
 .left-header>h1 {
     color: blue;
     font-family: "Open Sans";
@@ -24,6 +53,14 @@ html, body {
 
 .left-header > a:hover, .right-header > a:hover {
     animation: h 1s linear;
+    cursor: pointer;
+    background-color: orange;
+}
+
+.left-header > div:hover {
+    animation: h2 0.5s linear;
+    cursor: pointer;
+    color: blue;
 }
 
 @keyframes h {
@@ -31,19 +68,60 @@ html, body {
     to {background-color: orange;}
 }
 
+@keyframes h2 {
+    from {color: black;}
+    to {color: blue;}
+}
+
+
 .left-header {
     width: 75%;
-    height: 20vh;
+    height: 10vh;
     display: flex;
     align-items: center;
     justify-content: stretch;
     border-bottom: 2px solid black;
     background-color: inherit;
+    gap: 10px;
 }
+
+.left-header > .logo {
+    margin-left: 5vw;
+
+}
+
+
+#search {
+    border-color: transparent;
+    border-radius: 5px;
+    margin-left: 5vw;
+}
+
+#search:focus {
+    animation: sEnlarge 1s ease-in;
+    margin-left: 1vw;
+    height: 5vh;
+    width: 25vw;
+}
+
+
+
+@keyframes sEnlarge {
+    from {
+        margin-left: 5vw;
+        height: initial;
+        width: initial;
+    }
+    to {margin-left: 1vw;
+        height: 5vh;
+        width: 25vw;}
+}
+
+
 
 .header {
     width: 100vw;
-    height: 20vh;
+    height: 10vh;
     z-index: 5;
     display: flex;
     background-color: #9dc1d1;
@@ -53,7 +131,7 @@ html, body {
 
 .body {
     width: 100vw;
-    height: 80vh;
+    height: 90vh;
     display: grid;
     z-index: 4;
     background-color: #d3e2e9;
@@ -62,8 +140,8 @@ html, body {
 }
 
 .logo {
-    width: 101px;
-    height: 101px;
+    width: 50;
+    height: 50px;
     border-radius: 5px;
 }
 
@@ -76,7 +154,7 @@ html, body {
 
 .right-header {
     width: 25%;
-    height: 20vh;
+    height: 10vh;
     display:flex;
     align-items: center;
     border-bottom: solid black 2px;

@@ -2,55 +2,69 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@300&family=Open+Sans&display=swap" rel="stylesheet">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="styles/feed.css" class="css">
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@300&family=Open+Sans&display=swap"
+        rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles/feed.css" class="css">
 </head>
 
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="left-header">
-        <img onclick="window.location.href = '/'" class="logo" src="/assets/logo.png" />
-        <a href="/home">
-          <h1>CareerLink</h1>
-        </a>
-        <a href="/about">
-          <h3>About CareerLink</h3>
-        </a>
-        <a href="/why">
-          <h3>Why CareerLink?</h3>
-        </a>
-      </div>
-      <div class="right-header">
-        <a href="/login">
-          <h3>Login</h3>
-        </a>
-        <a href="/register">
-          <h3>Register</h3>
-        </a>
-        <a href="/help">
-          <h3 style="width: 25px; height: 25px; background-color: lightyellow; border-radius: 5px;">❓</h3>
-        </a>
-      </div>
-    </div>
-    <div class="body">
-      <div class="mbody">
-        <h3>Login</h3>
-        <div class="inputs">
-          <input id="uname" placeholder="Enter username or email" />
-          <input id="psw" placeholder="Enter password" type="password" />
+    <div class="container">
+        <div class="header">
+            <div class="left-header">
+                <img onclick="window.location.href = '/'" class="logo" src="/assets/logo.png" />
+                <input id="search" type="search" placeholder="Search people on CareerLink" />
+                <div id="conn">
+                    <span class="material-symbols-outlined">
+                        group
+                        </span>
+                        <p>Connections</p>
+                </div>
+                <div id="msg">
+                    <span class="material-symbols-outlined">
+                        chat
+                        </span>
+                        <p>Messages</p>
+                </div>
+                <div id="news">
+                    <span class="material-symbols-outlined">
+                        newspaper
+                        </span><br>
+                        <p>    Alerts and Feed</p>
+                </div>
+            </div>
+
+            <div class="right-header">
+                <a href="/account"/>
+                <a href="/help">
+                    <h3 style="width: 25px; height: 25px; background-color: lightyellow; border-radius: 5px;">❓</h3>
+                </a>
+            </div>
         </div>
-        <button id="submit">Login</button>
-      </div>
+        <div class="body">
+            <div style="display:none;" id="alert" class="modal">
+                <h1 id="title"></h1>
+                <h4 id="message"></h4>
+                <h5>Press outside the box to close it.</h5>
+              </div>
+        </div>
     </div>
-  </div>
 </body>
-<script src="./scripts/login.js"></script>
+<script>
+    window.onload = function(){
+        if (!window.location.href.includes("feed")){
+            window.location.href = "/feed";
+        }
+    }
+</script>
+<script src="./scripts/feed.js"></script>
 
 </html>

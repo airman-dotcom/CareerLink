@@ -14,7 +14,7 @@ const { v4: uuidv4 } = require("uuid");
 const mongoose = require("mongoose");
 const { json } = require("express");
 let MONGO_URI = "mongodb+srv://careerlinkdhs:sahra253@careerlink.ktuwj9q.mongodb.net/?retryWrites=true&w=majority"
-//mongoose.connect(MONGO_URI)
+mongoose.connect(MONGO_URI)
 let db = mongoose.connection
 const kittySchema = new mongoose.Schema()
 app.use(express.static("public"));
@@ -34,7 +34,6 @@ mongoose.connection.on("connected", (err) => {
     console.log(err)
   }
   console.log("Connected to database")
-  console.log(credentials)
 })
 let list_files = fs.readdirSync("public");
 list_files = list_files.filter((name) => name.includes("."));
@@ -49,16 +48,9 @@ app.get("/", (req, res) => {
 })
 
 app.get("/url/:ab", (req, res) => {
-  credentials.findOne({id: req.params.ab}, (data, err) => {
+  credentials.findOne({id: `${req.params.ab}`}, (err, data) => {
     if (data != null){
-      let nd = data;
-      delete nd.id;
-      let uu = uuidv4();
-      nd.lkey = uu;
-      credentials.replaceOne(data, nd, (err2) => {
-        res.sendFile(__dirname + "/public/feed.html");
-      })
-
+      res.sendFile(__dirname + "/public/feed.html");
     }
   })
 })
@@ -76,8 +68,8 @@ async function send_mail(sender, rec, title, message, html){
       }
     ]
   })
-  request.then((result) => {
-    share_result_email(result.body);
+  request.then((req) => {
+    console.log(req)
   })
 }
 
@@ -90,16 +82,15 @@ app.post("/auth", (req, res) => {
   let email = req.body.email;
   if (Object.keys(req.body).includes("email")){
     //Registration
-    credentials.findOne({username: username}, (err, data) => {
+    credentials.findOne({first_name: fname, last_name: lname}, (err, data) => {
       if (data != null){
         res.json({status: false, message:  "Username already exists"})
       } else {
         let uuid = uuidv4();
         //add One
-        credentials.insertOne({username: username, password: password, email: email, id: uuid, first_name: fname, last_name: lname})
-        send_mail({Email: "careerlink.dhs@gmail.com", Name: "Career Link"},{Email: email, Name: `${fname} ${lname}`}, "CareerLink Confirmation Email", "You have registered for a CareerLink Account. Please confirm your account validity by using the link below.", `<img src='https://CareerLink.aboutabot.repl.co/assets/picture.png' alt='company logo'/><h4>You have registered for a CareerLink Account. Please confirm your account validity by using the link below.</h4><br><h3>https://http://192.168.160.124:8000/${uuid}</h3>`);
-        console.log(credentials)
-        res.json({status: true});
+        credentials.insertOne({password: password, email: email, id: uuid, first_name: fname, last_name: lname})
+        send_mail({Email: "careerlink.dhs@gmail.com", Name: "Career Link"},[{Email: email, Name: `${fname} ${lname}`}], "CareerLink Confirmation Email", "You have registered for a CareerLink Account. Please confirm your account validity by using the link below.", `<img src='https://CareerLink.aboutabot.repl.co/assets/picture.png' alt='company logo'/><h4>You have registered for a CareerLink Account. Please confirm your account validity by using the link below.</h4><br><h3>http://192.168.160.124:8000/${uuid}</h3>`);
+        res.json({status: true, id: uuid});
         return;
       }
     })
@@ -114,3 +105,13 @@ app.post("/auth", (req, res) => {
 })
 
 
+app.post("/validate", (req, res) => {
+  let code = req.body.code;
+  credentials.findOne({id: code}, (err, data) => {
+    if (data == null) {
+      res.json({status: false})
+    } else {
+      res.json({status: true})
+    }
+  })
+})

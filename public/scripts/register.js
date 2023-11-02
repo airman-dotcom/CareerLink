@@ -22,6 +22,10 @@ btn.onclick = function(){
   .then(function(json){
     if (json.status){
       message(true);
+      let i = json.id;
+      let n = new Date();
+      n.setHours(n.getHours() + 2);
+      document.cookie = `v=${i}; expires=${n.getUTCDate()}; path=/feed`;
     } else {
       message(false, json.message)
     }
@@ -33,7 +37,6 @@ function message(type, m){
   if (type == true){
     modal_title.innerHTML = "Account Created! Check your email inbox!";
     modal_message.innerHTML = "Check the inbox of the email you entered for a email confirmation link to confirm that you are in fact a real person."
-    document.cookie = ""
   } else if (type =="close"){
     modal.style.display = "none";
     modal_title.innerText = "";
